@@ -43,6 +43,7 @@ class MinimalPublisher : public rclcpp::Node{
       }
       this->declare_parameter("count", ctr_);
       
+      
   }
 
  private:
