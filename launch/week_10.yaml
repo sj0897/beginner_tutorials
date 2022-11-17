@@ -5,7 +5,7 @@ launch:
     default: "100"
 
 - node:
-    pkg: "cpp_pubsub"
+    pkg: "beginner_tutorials"
     exec: "talker"
     name: "publisher"
     output: "screen"
