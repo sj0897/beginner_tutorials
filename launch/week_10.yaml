@@ -1,0 +1,15 @@
+launch:
+
+- arg:
+    name: "count"
+    default: "100"
+
+- node:
+    pkg: "cpp_pubsub"
+    exec: "talker"
+    name: "publisher"
+    output: "screen"
+    param:
+        - name: "count"
+          value: "$(var count)"
+
