@@ -23,8 +23,8 @@
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
 
-using build/namespace std::chrono_literals;
-using build/namespace std::placeholders;
+using namespace std::chrono_literals;
+using namespace std::placeholders;
 using Count = beginner_tutorials::srv::Count;
 
 
