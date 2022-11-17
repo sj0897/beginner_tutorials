@@ -12,18 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <string>
 #include <chrono>
 #include <functional>
 #include <memory>
 #include <rcl_interfaces/msg/detail/parameter_descriptor__struct.hpp>
-#include <string>
+
 
 #include "beginner_tutorials/srv/count.hpp"
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
 
-using namespace std::chrono_literals;
-using namespace std::placeholders;
+using build/namespace std::chrono_literals;
+using build/namespace std::placeholders;
 using Count = beginner_tutorials::srv::Count;
 
 
@@ -33,7 +34,7 @@ using Count = beginner_tutorials::srv::Count;
 class MinimalPublisher : public rclcpp::Node{
  public:
   MinimalPublisher()
-  : Node("minimal_publisher"), count_(0),ctr_(1000) {
+  : Node("minimal_publisher"), count_(0), ctr_(1000) {
     publisher_ = this->create_publisher<std_msgs::msg::String>("topic", 10);
     timer_ = this->create_wall_timer(
       500ms, std::bind(&MinimalPublisher::timer_callback, this));
@@ -54,36 +55,39 @@ class MinimalPublisher : public rclcpp::Node{
     get_count_service_ = this->create_service<Count>(
         get_count_service_name,
         std::bind(&MinimalPublisher::get_count_callback, this, _1, _2));
-      
-      
   }
 
  private:
   void timer_callback() {
     ctr_ = this->get_parameter("count").get_parameter_value().get<int>();
-    if(count_ < ctr_){
+    if (count_ < ctr_) {
     auto message = std_msgs::msg::String();
     message.data = "Hello, world! This is Sparsh's Publisher "
                     + std::to_string(count_++);
     switch ((count_-1)%5) {
     case 0:
-      RCLCPP_INFO_STREAM(this->get_logger(), "Publishing:"<< message.data.c_str());
+      RCLCPP_INFO_STREAM(this->get_logger(),
+                          "Publishing:"<< message.data.c_str());
       break;
-    
+
     case 1:
-      RCLCPP_DEBUG_STREAM(this->get_logger(), "Publishing:"<< message.data.c_str());
+      RCLCPP_DEBUG_STREAM(this->get_logger(),
+                           "Publishing:"<< message.data.c_str());
       break;
-    
+
     case 2:
-      RCLCPP_WARN_STREAM(this->get_logger(), "Publishing:"<< message.data.c_str());
+      RCLCPP_WARN_STREAM(this->get_logger(),
+                           "Publishing:"<< message.data.c_str());
       break;
-    
+
     case 3:
-      RCLCPP_ERROR_STREAM(this->get_logger(), "Publishing:"<< message.data.c_str());
+      RCLCPP_ERROR_STREAM(this->get_logger(),
+                           "Publishing:"<< message.data.c_str());
       break;
-    
+
     case 4:
-      RCLCPP_FATAL_STREAM(this->get_logger(), "Publishing:"<< message.data.c_str());
+      RCLCPP_FATAL_STREAM(this->get_logger(),
+                           "Publishing:"<< message.data.c_str());
       break;
     }
     publisher_->publish(message);
