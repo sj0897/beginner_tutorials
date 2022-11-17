@@ -1,5 +1,3 @@
-# beginner_tutorials
-
 # Begineer Tutorials - Publisher-Subscriber
 
 # Dependencies
