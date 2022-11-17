@@ -1,4 +1,4 @@
-# Begineer Tutorials - Publisher-Subscriber
+# Beginner Tutorials - Publisher-Subscriber
 
 # Dependencies
 <ul>
