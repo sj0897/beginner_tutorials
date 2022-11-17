@@ -13,13 +13,19 @@
 // limitations under the License.
 
 #include <chrono>
+#include <functional>
 #include <memory>
+#include <rcl_interfaces/msg/detail/parameter_descriptor__struct.hpp>
+#include <string>
 
+#include "beginner_tutorials/srv/count.hpp"
 #include "rclcpp/rclcpp.hpp"
-#include "rclcpp/logging.hpp"
 #include "std_msgs/msg/string.hpp"
 
 using namespace std::chrono_literals;
+using namespace std::placeholders;
+using Count = beginner_tutorials::srv::Count;
+
 
 /* This example creates a subclass of Node and uses std::bind() to register a
  * member function as a callback from the timer. */
@@ -42,6 +48,12 @@ class MinimalPublisher : public rclcpp::Node{
                               "Set logger level DEBUG fails.");
       }
       this->declare_parameter("count", ctr_);
+
+    std::string get_count_service_name =
+        "/" + std::string(this->get_name()) + "/" + "Count";
+    get_count_service_ = this->create_service<Count>(
+        get_count_service_name,
+        std::bind(&MinimalPublisher::get_count_callback, this, _1, _2));
       
       
   }
@@ -77,8 +89,16 @@ class MinimalPublisher : public rclcpp::Node{
     publisher_->publish(message);
     }
   }
+
+  void get_count_callback(const std::shared_ptr<Count::Request> request,
+                          std::shared_ptr<Count::Response> response) {
+    (void)request;
+    response->count = ctr_;
+  }
+
   rclcpp::TimerBase::SharedPtr timer_;
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
+  rclcpp::Service<Count>::SharedPtr get_count_service_;
   int count_;
   int ctr_;
 };
