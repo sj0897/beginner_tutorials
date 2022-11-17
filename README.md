@@ -40,6 +40,11 @@ Follow same compile and build instructions as above.
   ros2 launch beginner_tutorials week_10.yaml count:=20
 ```
 
+## Calling the service
+```
+  ros2 service call /MinimalPublisher/Count
+```
+
 ## Results
 
 ### RQT_Console
