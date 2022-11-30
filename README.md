@@ -10,9 +10,9 @@
 ```
     cd "your_colcon_workspace"/src
     git clone https://github.com/sj0897/beginner_tutorials.git
-    cd ..
     colcon build
-    source "your_colcon_workspace"/install/setup.bash
+    source /opt/ros/foxy/setup.bash
+    source install/setup.bash
 ```
 
 After you've compiled and sourced your workspace
