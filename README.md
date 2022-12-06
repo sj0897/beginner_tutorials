@@ -50,3 +50,16 @@ Follow same compile and build instructions as above.
 ### RQT_Console
 ![image](https://github.com/sj0897/beginner_tutorials/blob/Week10_HW/Results/rqt.png)
 
+### TF outputs
+![image](https://github.com/sj0897/beginner_tutorials/blob/Week11_HW/Results/TF_echo.png)
+
+### Rosbags
+## To record
+```
+  ros2 launch beginner_tutorials week11.py record:=true
+```
+
+## To playback after recording
+```
+  ros2 launch beginner_tutorials week11.py playback:=true
+```
